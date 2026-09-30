@@ -1,10 +1,11 @@
-/**
+﻿/**
  * Impression Design Solution - Core Client Script
  */
 
 document.addEventListener('DOMContentLoaded', () => {
   initGalleryToggles();
   initMobileMenu();
+  initLuxuryHeader();
 });
 
 /* 1. Interactive "View Collection Gallery" Toggle */
@@ -20,7 +21,6 @@ function initGalleryToggles() {
         const isHidden = targetDrawer.hidden;
 
         if (isHidden) {
-          // Open drawer
           targetDrawer.hidden = false;
           button.setAttribute('aria-expanded', 'true');
           button.innerHTML = 'View Less \u25B4';
@@ -30,7 +30,6 @@ function initGalleryToggles() {
             targetDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
           });
         } else {
-          // Close drawer
           targetDrawer.hidden = true;
           button.setAttribute('aria-expanded', 'false');
           button.innerHTML = 'View More \u25BE';
@@ -53,12 +52,25 @@ function initMobileMenu() {
       nav.classList.toggle('mobile-active');
     });
     
-    // Close menu when a link is clicked
     nav.querySelectorAll('a').forEach(link => {
       link.addEventListener('click', () => {
         menuBtn.setAttribute('aria-expanded', 'false');
         nav.classList.remove('mobile-active');
       });
+    });
+  }
+}
+
+/* 3. Luxury Header Scroll Effect */
+function initLuxuryHeader() {
+  const header = document.querySelector('.site-header');
+  if (header) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
     });
   }
 }
